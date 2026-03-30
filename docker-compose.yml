@@ -1,0 +1,41 @@
+services:
+
+  blazegraph:
+    image: robcast/researchspace-blazegraph:2.2.0-jre17
+    container_name: ${PROJECT_NAME:-ks}_blazegraph
+    restart: unless-stopped
+    environment:
+      - JAVA_OPTS=-Xmx4g
+    logging:
+      driver: json-file
+      options:
+        max-size: "200k"
+        max-file: "10"
+    ports:
+      - "${PORT_BLAZEGRAPH:-8082}:8080"
+    volumes:
+      - blazegraph-data:/blazegraph-data
+
+  platform:
+    image: ${PLATFORM_IMAGE:-swissartresearx/researchspace:develop}
+    container_name: ${PROJECT_NAME:-ks}_platform
+    restart: unless-stopped
+    depends_on:
+      - blazegraph
+    environment:
+      JAVA_OPTS: -Xmx1g
+    logging:
+      driver: json-file
+      options:
+        max-size: "200k"
+        max-file: "10"
+    ports:
+      - "${PORT_PLATFORM:-8081}:8080"
+    volumes:
+      - platform-data:/runtime-data
+      - ./app:/apps/kitchensink
+
+volumes:
+  blazegraph-data:
+  platform-data:
+  
