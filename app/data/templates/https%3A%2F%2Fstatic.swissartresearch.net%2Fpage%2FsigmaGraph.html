@@ -81,6 +81,13 @@
                 template="{{> template}}"
             >
                 <template id="template">
+                    <mp-event-trigger 
+                            id='node-add-test'
+                            type="JILA.PanelNodeAdd"
+                            data='{"node": "https://resource.jila.zb.uzh.ch/actor/A653DB30-F415-348F-98F3-1CD871AFB7F0"}'
+                        >
+                        <button class="btn btn-primary">Trigger event</button>
+                    </mp-event-trigger>
                     <dl>
                         {{#if id}}
                             <dt>ID</dt>
