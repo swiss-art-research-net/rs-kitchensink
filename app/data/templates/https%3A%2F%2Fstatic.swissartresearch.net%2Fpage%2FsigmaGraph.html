@@ -1,0 +1,81 @@
+[[> partial:pageHeader ]]
+<div class="rs-component home-title">
+    <bs-row>
+        <bs-col md="10" md-offset="1">
+            <h1>Sigma Graph Component</h1>
+            <semantic-context repository="itten">
+                <semantic-sigma-graph
+                    id="entity-view-graph"
+                    height="100%"
+                    width="100%"
+                    grouping='{
+                        "behaviour": "none",
+                        "enabled": true,
+                        "threshold": 5
+                    }'
+                    controls="true"
+                    persist-graph="true"
+                    persist-graph-message-position="tl"
+                    edge-filter="true"
+                    search-box="true"
+                    sizes='{"nodes": 10, "edges": 2}'
+                    colours='{
+                            "[[resolvePrefix "crm:E21_Person"]]": "#FF66B3",
+                            "[[resolvePrefix "crm:E74_Group"]]": "#f9987e",
+                            "[[resolvePrefix "crm:E39_Actor"]]": "#e44343",
+                            "[[resolvePrefix "crm:E53_Place"]]": "#00CC66",
+                            "[[resolvePrefix "crm:E78_Curated_Holding"]]": "#FFD966",
+                            "[[resolvePrefix "crm:E5_Event"]]": "#0099FF",
+                            "[[resolvePrefix "crm:E22_Human-Made_Object"]]": "#B0927A"
+                        }'
+                    node-query='CONSTRUCT {
+                        ?subject ?predicate ?object .
+                        ?subject a ?typeSubject .
+                        ?object a ?typeObject .
+                    } WHERE {
+                        GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
+                            ?subject ?predicate ?object .
+                        }
+                        ?subject a ?typeSubject .
+                        ?object a ?typeObject .
+                        VALUES (?typeSubject) {
+                            [[> queryPartialEntityTypes ]]
+                        }
+                        VALUES (?typeObject) {
+                            [[> queryPartialEntityTypes ]]
+                        }
+                    }'
+                    query='
+                        CONSTRUCT {
+                        ?subject ?predicate ?object .
+                        ?subject a ?typeSubject .
+                        ?object a ?typeObject .
+                        } WHERE {
+                            BIND(<https://resource.jila.zb.uzh.ch/actor/06B281E1-D405-3017-9AF0-9D5B2F0993A1> AS ?subject)
+                            GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
+                                ?subject ?predicate ?object .
+                            }
+                            ?subject a ?typeSubject .
+                            ?object a ?typeObject .
+                            VALUES (?typeSubject) {
+                                [[> queryPartialEntityTypes ]]
+                            }
+                            VALUES (?typeObject) {
+                                [[> queryPartialEntityTypes ]]
+                            }
+                        }'
+                ></semantic-sigma-graph>
+            </semantic-context>
+        </bs-col>
+    </bs-row>
+</div>
+
+[[#*inline "queryPartialEntityTypes"]]
+    (crm:E5_Event)
+    (crm:E21_Person)
+    (crm:E22_Human-Made_Object)
+    (crm:E39_Actor)
+    (crm:E53_Place)
+    (crm:E74_Group)
+    (crm:E78_Curated_Holding)
+[[/inline]]
