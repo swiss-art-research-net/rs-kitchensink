@@ -1,3 +1,6 @@
+dcDefault=https://static.swissartresearch.net/page/
+page=https://static.swissartresearch.net/page/
+partial=https://static.swissartresearch.net/partial/
 aat = http://vocab.getty.edu/aat/
 aaao = https://ontology.swissartresearch.net/aaao/
 crmsci = http://www.cidoc-crm.org/extensions/crmsci/
