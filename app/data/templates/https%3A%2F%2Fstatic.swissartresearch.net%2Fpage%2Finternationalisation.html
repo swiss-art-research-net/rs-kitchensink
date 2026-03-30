@@ -1,0 +1,28 @@
+[[> partial:pageHeader ]]
+
+<div class="rs-component home-title">
+    <bs-row>
+        <bs-col md="10" md-offset="1">
+            <h1>Internationatlisation</h1>
+        </bs-col>
+    </bs-row>
+    <bs-row>
+        <bs-col md="10" md-offset="1">
+            <p>
+                <mp-user-language-switch languages='["en", "de"]'></mp-user-language-switch>
+            </p>
+            <p>
+                [[i18n "welcomeMessage"]]
+            </p>
+            <p>
+                [[i18n "welcomeMessagePersonalised" "user"]]
+            </p>
+            <p>
+                [[i18n "fieldLabelUsername" bundle="fields"]]
+            </p>
+            <p>
+                [[i18n "messageWithHTML" escapeHTML=false]]
+            </p>
+        </bs-col>
+    </bs-row>
+</div>
