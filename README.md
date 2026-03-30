@@ -21,5 +21,5 @@ The Docker Compose configuration contains defaults for the ResearchSpace image a
 Alternatively, specify the variables before the `docker compose` command:
 
 ```bash
-PLATFORM_IMAGE=researchspace/platform:latest docker compose up -d
+PLATFORM_IMAGE=researchspace/platform-ci:latest docker compose up -d
 ```
