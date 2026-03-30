@@ -17,7 +17,7 @@ services:
       - blazegraph-data:/blazegraph-data
 
   platform:
-    image: ${PLATFORM_IMAGE:-swissartresearx/researchspace:1f849d7ca782d5324060c707d8d9cd75d8f144e1}
+    image: ${PLATFORM_IMAGE:-swissartresearx/researchspace:e891b3ca8358ff85c6a5e6e8cfbb870155a7d804}
     container_name: ${PROJECT_NAME:-ks}_platform
     restart: unless-stopped
     depends_on:
