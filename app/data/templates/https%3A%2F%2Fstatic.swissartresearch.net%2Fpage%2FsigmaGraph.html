@@ -1,4 +1,6 @@
 [[> partial:pageHeader ]]
+
+[[> component-events-controller]]
 <div class="rs-component home-title">
     <bs-row>
         <bs-col md="10" md-offset="1">
@@ -6,7 +8,7 @@
         </bs-col>
     </bs-row>
     <bs-row>
-        <bs-col md="8" md-offset="1">
+        <bs-col md="6" md-offset="1">
            <div style="height:600px;">
                 <semantic-context repository="itten">
                     <semantic-sigma-graph
@@ -56,7 +58,7 @@
                             ?subject a ?typeSubject .
                             ?object a ?typeObject .
                             } WHERE {
-                                BIND(<https://resource.jila.zb.uzh.ch/actor/06B281E1-D405-3017-9AF0-9D5B2F0993A1> AS ?subject)
+                                BIND(<[[> initialIri]]> AS ?subject)
                                 GRAPH <https://resource.jila.zb.uzh.ch/graph/network> {
                                     ?subject ?predicate ?object .
                                 }
@@ -73,8 +75,29 @@
                 </semantic-context>
               </div>
         </bs-col>
+        <bs-col md="4">
+             <mp-event-target-template-render
+                id="entity-view-panel"
+                template="{{> template}}"
+            >
+                <template id="template">
+                    <dl>
+                        {{#if id}}
+                            <dt>ID</dt>
+                            <dd>{{id}}</dd>
+                        {{/if}}
+                        {{#if nodes}}
+                            <dt>nodes</dt>
+                            <dd>{{nodes}}</dd>
+                        {{/if}}
+                    </dl>
+                </template>
+            </mp-event-target-template-render>
+        </bs-col>
     </bs-row>
 </div>
+
+[[#*inline "initialIri"]]https://resource.jila.zb.uzh.ch/actor/06B281E1-D405-3017-9AF0-9D5B2F0993A1[[/inline]]
 
 [[#*inline "queryPartialEntityTypes"]]
     (crm:E5_Event)
@@ -84,4 +107,51 @@
     (crm:E53_Place)
     (crm:E74_Group)
     (crm:E78_Curated_Holding)
+[[/inline]]
+
+
+[[#*inline "component-events-controller"]]
+
+    <mp-event-proxy 
+        on-event-type='Sigma.NodeClicked'
+        proxy-event-type='Component.TemplateUpdate' 
+        proxy-targets='["entity-view-panel"]'
+    ></mp-event-proxy>
+
+    <mp-event-proxy
+        on-event-type='JILA.ScatterGroupNode'
+        proxy-event-type='Sigma.ScatterGroupNode'
+        proxy-targets='["entity-view-graph"]'
+    ></mp-event-proxy>
+
+    <mp-event-proxy
+        on-event-type='JILA.PanelNodeClicked'
+        proxy-event-type='Component.TemplateUpdate'
+        proxy-targets='["entity-view-panel"]'
+    ></mp-event-proxy>
+
+    <mp-event-proxy
+        on-event-type='JILA.PanelNodeClicked'
+        proxy-event-type='Sigma.TriggerNodeClicked'
+        proxy-targets='["entity-view-graph"]'
+    ></mp-event-proxy>
+
+    <mp-event-proxy
+        on-event-type='JILA.PanelNodeAdd'
+        proxy-event-type='Sigma.TriggerNodeClicked'
+        proxy-targets='["entity-view-graph"]'
+    ></mp-event-proxy>
+
+    <mp-event-proxy 
+        on-event-type='Sigma.NodeClicked'
+        proxy-event-type='Component.TemplateUpdate' 
+        proxy-targets='["event-monitor"]'
+    ></mp-event-proxy>
+
+    <mp-event-proxy 
+        on-event-type='JILA.PanelNodeClicked'
+        proxy-event-type='Component.TemplateUpdate' 
+        proxy-targets='["event-monitor"]'
+    ></mp-event-proxy> 
+
 [[/inline]]
