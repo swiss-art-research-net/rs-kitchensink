@@ -17,3 +17,9 @@ The Docker Compose configuration contains defaults for the ResearchSpace image a
 - `PLATFORM_IMAGE`: The Docker image to use for the ResearchSpace platform. Default is `swissartresearx/researchspace:e891b3ca8358ff85c6a5e6e8cfbb870155a7d804`.
 - `PORT_PLATFORM`: The port on the host to map to the ResearchSpace platform. Default is `8081`.
 - `PORT_BLAZEGRAPH`: The port on the host to map to the Blazegraph SPARQL endpoint. Default is `8082`.
+
+Alternatively, specify the variables before the `docker compose` command:
+
+```bash
+PLATFORM_IMAGE=researchspace/platform:latest docker compose up -d
+```
