@@ -7,7 +7,7 @@ This is a sample ResearchSpace app for testing and development purposes.
 Clone the repository and start the services with Docker Compose:
 
 ```bash
-dcker compose up -d
+docker compose up -d
 ```
 
 ## Customisation
