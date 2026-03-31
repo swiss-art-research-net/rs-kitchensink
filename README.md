@@ -10,6 +10,12 @@ Clone the repository and start the services with Docker Compose:
 docker compose up -d
 ```
 
+Once the services are running, the application is available at `http://localhost:8081` and the Blazegraph SPARQL endpoint is available at `http://localhost:8082`.
+
+This repository contains the sample app mounted into the ResearchSpace container at `/apps/kitchensink`, so changes under [`app/`](/Users/fkraeutli/Sites/rs-kitchensink/app) are picked up from the local checkout.
+
+Some parts of the sample app also reference an external SPARQL repository at `https://jila.zb.uzh.ch/sparql`, so features depending on that data require network access and the remote endpoint to be available.
+
 ## Customisation
 
 The Docker Compose configuration contains defaults for the ResearchSpace image as well as for the port mapping. In order to change them, add a `.env` file to the project. The following variables are supported:
