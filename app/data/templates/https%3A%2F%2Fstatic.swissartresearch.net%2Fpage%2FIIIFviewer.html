@@ -1,0 +1,44 @@
+[[> partial:pageHeader ]]
+
+<div class="rs-component home-title">
+    <bs-row>
+        <bs-col md="10" md-offset="1">
+            <h1>IIIF Viewer</h1>
+        </bs-col>
+    </bs-row>
+    <bs-row>
+        <bs-col md="10" md-offset="1">
+           <div style="height: 700px">
+                <semantic-context repository="itten">
+                    <semantic-query
+                        query="SELECT ?image ?server WHERE {
+                            BIND(<https://resource.jila.zb.uzh.ch/collection/jila-43908e6998744707b9f97af7af418d61> as ?subject)
+                            ?subject crm:P46_is_composed_of/crm:P138i_has_representation ?visual_item .
+                            ?visual_item crm:P1_is_identified_by ?position_identifier ;
+                                la:digitally_shown_by/la:digitally_available_via/la:access_point ?image .
+                            BIND(REPLACE(STR(?image), '([^/]+$)', '') AS ?server)
+                        }"
+                        template="{{> template}}"
+                    >
+                        <template id="template">
+                            <mp-code-example
+                                show-code-by-default="true"
+                            >
+                                <![CDATA[
+                                    <rs-iiif-mirador 
+                                        images='[
+                                            {{#each bindings}}
+                                                "{{ image.value }}"{{#unless @last}},{{/unless}}
+                                            {{/each}}
+                                            ]'>
+                                    </rs-iiif-mirador>
+                                ]]>
+                            </mp-code-example>
+                        </template>
+
+                    </semantic-query>
+                </semantic-context>
+           </div>
+        </bs-col>
+    </bs-row>
+</div>
